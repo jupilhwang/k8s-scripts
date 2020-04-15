@@ -1,0 +1,15 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: fast
+  namespace: kube-system
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+provisioner: csi.vsphere.vmware.com
+allowVolumeExpansion: true
+parameters:
+  # DatastoreURL: "ds:///vmfs/volumes/vsan:52cdfa80721ff516-ea1e993113acfc77/" # Optional Parameter
+  # StoragePolicyName: "vSAN Default Storage Policy" # Optional Parameter
+  DatastoreURL: ds:///vmfs/volumes/5e7db562-b878c80a-d504-08f1eaf514e6/
+  #  csi.storage.k8s.io/fstype: "ext4"
+

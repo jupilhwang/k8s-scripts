@@ -10,9 +10,9 @@ spec:
   tls:
   - secretName: https-secret
     hosts:
-      - example.com
+      - k8s.tidc.skt
   rules:
-  - host: example.com
+  - host: k8s.tidc.skt
     http:
       paths:
       - path: /foo

@@ -8,7 +8,7 @@ spec:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: jupil.hwang@gmail.com
     privateKeySecretRef:
-      name: letsencrypt-prod
+      name: letsencrypt-private-key-prod
     solvers:
     - selector: {}
       http01:
@@ -21,10 +21,10 @@ metadata:
   name: letsencrypt-staging
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
     email: jupil.hwang@gmail.com
     privateKeySecretRef:
-      name: letsencrypt-staging
+      name: letsencrypt-private-key-staging
     solvers:
     - selector: {}
       http01:
