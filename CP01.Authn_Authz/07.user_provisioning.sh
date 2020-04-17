@@ -1,25 +1,7 @@
-export API_ENDPOINT=10.197.37.218:6443
-export POD_NAME='kube-apiserver-dev-cluster-control-plane-gv4x5'
+export API_ENDPOINT=10.40.89.201:6443
+export POD_NAME='kube-apiserver-dev-control-plane-6svlc'
 export USERNAME=private-user
 export GROUP=private-group
-
-#envsubst < ./private-user-group/private_key_template.json | cfssl genkey - | cfssljson -bare client
-
-cat <<EOF | echo kubectl apply -f -
-apiVersion: certificates.k8s.io/v1beta1
-kind: CertificateSigningRequest
-metadata:
-  name: $USERNAME
-spec:
-  username: $USERNAME
-  groups:
-  - system:authenticated
-  request: $(cat client.csr | base64 | tr -d '\n')
-  usages:
-  - digital signature
-  - key encipherment
-  - client auth
-EOF
 
 dd if=/dev/urandom of=~/.rnd bs=256 count=1
 
@@ -40,11 +22,13 @@ kubectl config set-credentials ${USERNAME} --client-certificate=./private-user-g
 kubectl config set-context dev --cluster=dev --user=$USERNAME
 kubectl config use-context dev
 
-echo "kubectl get all from Cluster"
+echo ""
+echo ""
+echo "#### kubectl get all with private-user"
 kubectl get all 
 
 echo ""
 echo ""
 
-echo "kubectl get all -n private-org"
+echo "#### kubectl get all -n private-org with private-user"
 kubectl get all -n private-org
